@@ -19,4 +19,14 @@ mongoose.connect('mongodb://localhost/mydatabase', {
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err));
 
-  
+  const admin = require('firebase-admin');
+
+const serviceAccount = require('./path/to/serviceAccountKey.json'); // Path to your service account key JSON file
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'ripl-85cf8.firebaseapp.com', // Replace with your Firebase project's database URL
+});
+
+const firestore = admin.firestore();
+
