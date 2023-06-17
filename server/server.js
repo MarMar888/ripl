@@ -1,35 +1,52 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const express = require('express');
+const { MongoClient } = require('mongodb');
+const cors = require('cors');
+
 const uri = "mongodb+srv://mhb:ORMj2W3dakH0mFJZ@cluster0.18ctz4a.mongodb.net/?retryWrites=true&w=majority";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
-
-  /* const admin = require('firebase-admin');
-
-const serviceAccount = require('./path/to/serviceAccountKey.json'); // Path to your service account key JSON file
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'ripl-85cf8.firebaseapp.com', // Replace with your Firebase project's database URL
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-const firestore = admin.firestore();
-*/
+const app = express();
+
+// Middleware
+app.use(cors());  // Handle CORS
+app.use(express.json());  // Parse JSON request bodies
+
+// Connect to MongoDB
+client.connect(err => {
+  if (err) {
+    console.error('Failed to connect to MongoDB:', err);
+    return;
+  }
+
+  const experiencesCollection = client.db("ripl").collection("experiences");
+
+  // Routes
+  app.get('/experiences', (req, res) => {
+    experiencesCollection.find().toArray()
+      .then(experiences => res.json(experiences))
+      .catch(err => {
+        console.error('Failed to fetch experiences:', err);
+        res.status(500).json({ message: 'Internal server error' });
+      });
+  });
+
+  app.post('/experiences', (req, res) => {
+    const newExperience = req.body;
+
+    experiencesCollection.insertOne(newExperience)
+      .then(result => res.json(result.ops[0]))
+      .catch(err => {
+        console.error('Failed to add experience:', err);
+        res.status(500).json({ message: 'Internal server error' });
+      });
+  });
+
+  // Start server
+  const port = process.env.PORT || 5000;
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+});
