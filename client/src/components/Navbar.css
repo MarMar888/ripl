@@ -1,0 +1,43 @@
+/* Navbar.css */
+
+.navbar {
+display: flex;
+height: 80px;
+  }
+  
+  .ripl {
+    color: #2AABE2;
+    align-items:center
+   
+
+  }
+  
+  .links {
+
+  }
+  
+
+
+.links a {
+
+    text-decoration: none; 
+    color: #000; 
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 20;
+
+
+  }
+  
+  .links a:hover {
+ 
+    color: #333; 
+  }
+
+  .ripl-image {
+    width: auto; /* Set the maximum width of the image */
+    height: 60px; /* Allow the height to adjust automatically based on the width */
+  }
+  
+  
+  

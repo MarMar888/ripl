@@ -1,20 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AddExperience from './AddExperience';
+import './Navbar.css';
 
 function Navbar() {
-    return (
-        <nav>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/add-experience">Add Experience</Link>
-                </li>
-            </ul>
-        </nav>
-    );
+  return (
+    <nav className='navbar'>
+        <h1 className='ripl'>
+        <img src={process.env.PUBLIC_URL + '/Ripl Dark (1).png'} alt='Ripl Company' className='ripl-image' />
+        <span>Ripl</span>
+        </h1>
+
+      <div className='links'>
+        <a href='/'>Home</a>
+        <a href='/about'>About</a>
+        <a href='/services'>Services</a>
+        <a href='/contact'>Contact</a>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;
