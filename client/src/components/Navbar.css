@@ -17,10 +17,12 @@
   padding-right: 10px;
   font-size: 20px;
   height: 40px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  top: -10px;
+
 }
 
 
@@ -31,6 +33,7 @@ Need to get the background change to go to the top of the screen. Also figure ou
   color: whitesmoke;
   background-color: #2aabe2;
   transition: background-color 0.3s, color 0.3s;
+
 }
 
 .ripl-image {
