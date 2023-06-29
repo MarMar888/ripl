@@ -6,16 +6,16 @@ import './Navbar.css';
 function Navbar() {
   return (
     <nav className='navbar'>
-        <h1 className='ripl'>
+      <h1 className='ripl'>
         <img src={process.env.PUBLIC_URL + '/Ripl Dark (1).png'} alt='Ripl Company' className='ripl-image' />
         <span>Ripl</span>
-        </h1>
+      </h1>
 
       <div className='links'>
-        <a href='/'>Home</a>
-        <a href='/about'>About</a>
-        <a href='/services'>Services</a>
-        <a href='/contact'>Contact</a>
+        <Link to='/'>Home</Link>
+        <Link to='/about'>About</Link>
+        <Link to='/services'>Services</Link>
+        <Link to='/contact'>Contact</Link>
       </div>
     </nav>
   );
